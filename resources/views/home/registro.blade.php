@@ -20,18 +20,19 @@
 				      </div><br />
 				    @endif
 					<hr>
-					<form>
+					<form  action="{{ url('/usuario') }}" method="post">
+					  @csrf
 					  <div class="form-group">
 					  	<small class="form-text text-muted">Por favor ingresa tu nombre real</small>
 					    <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" required>
 					  </div>
 					  <div class="form-group">
 					  	<small class="form-text text-muted">Por favor ingresa tu apellido real</small>
-					    <input name="" type="text" class="form-control" id="apellido" placeholder="Apellido" required>
+					    <input name="apellido" type="text" class="form-control" id="apellido" placeholder="Apellido" required>
 					  </div>
 					  <div class="form-group">
 					  	<small class="form-text text-muted">Ingresa tu dirección de correo electrónico</small>
-					    <input name="apellido" type="email" class="form-control" id="email" placeholder="Dirección de correo electrónico" required>
+					    <input name="email" type="email" class="form-control" id="email" placeholder="Dirección de correo electrónico" required>
 					  </div>
 					  <div class="form-group">
 					  	<small class="form-text text-muted">Ingresa una contraseña que contenga 8 caracteres alfanuméricos</small>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductoTable extends Migration
+class CreateUsuRolTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateProductoTable extends Migration
      */
     public function up()
     {
-        Schema::create('vpr_producto', function (Blueprint $table) {
+        Schema::create('usu_rol', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->bigInteger('precio');
+            $table->bigInteger('fk_rol')->unsigned();
+            $table->bigInteger('fk_usuario')->unsigned();
+            $table->foreign('fk_rol')->references('id')->on('rols');
+            $table->foreign('fk_usuario')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateProductoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vpr_producto');
+        Schema::dropIfExists('usu_rol');
     }
 }

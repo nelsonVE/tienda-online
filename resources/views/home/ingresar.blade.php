@@ -10,17 +10,27 @@
 				<div class="col-md-4 p-5" style="background-color: #fff; border-radius: 7px; color: #333;">
 					<h2>Ingresar</h2>
 					Por favor inserta tus datos para ingresar al sistema
+					@if ($errors->any())
+				      <div class="alert alert-danger">
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				              <li>{{ $error }}</li>
+				            @endforeach
+				        </ul>
+				      </div><br />
+				    @endif
 					<hr> <br>
-					<form>
+					<form action="/usuario/login" method="post">
+					  @csrf
 					  <div class="form-group">
-					    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Dirección de correo electrónico" required>
+					    <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Dirección de correo electrónico" required>
 					    
 					  </div>
 					  <div class="form-group">
-					    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" required>
+					    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Contraseña" required>
 					  </div>
 					  <div class="form-group form-check">
-					    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+					    <input type="checkbox" class="form-check-input" name="remember" id="exampleCheck1">
 					    <label class="form-check-label" for="exampleCheck1">Mantener sesión</label>
 					  </div> <br>
 					  <button type="submit" class="btn btn-primary" style="width: 100%;">Ingresar</button>

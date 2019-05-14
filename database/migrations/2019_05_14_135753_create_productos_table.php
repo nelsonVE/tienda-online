@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersRoleRelation extends Migration
+class CreateProductosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateUsersRoleRelation extends Migration
      */
     public function up()
     {
-        Schema::create('vpr_usu_rol', function (Blueprint $table) {
+        Schema::create('productos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('fk_rol')->unsigned();
-            $table->bigInteger('fk_usuario')->unsigned();
-            $table->foreign('fk_rol')->references('id')->on('vpr_rol');
-            $table->foreign('fk_usuario')->references('id')->on('vpr_usuario');
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->bigInteger('precio');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateUsersRoleRelation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vpr_usu_rol');
+        Schema::dropIfExists('productos');
     }
 }
