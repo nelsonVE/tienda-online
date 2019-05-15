@@ -8,9 +8,32 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
+    {
+        $usuario = Usuario::find($request->session()->get('user_id'));
+        
+        if(!$usuario)
+            return view('home.index', [
+                "logged" => false
+            ]);
+        
+        else
+            return view('home.index', [
+                "logged" => true,
+                "usuario" => $usuario
+            ]);
+        
+    }
+
+    public function ingresar()
     {
         return view('home.ingresar');
+    }
+
+    public function salir(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('/');
     }
 
     public function create()
@@ -25,7 +48,8 @@ class UsuarioController extends Controller
             'apellido' => 'required|string|max:64',
             'email' => 'required|string|max:128',
             'password' => 'required_with:password_confirmation|string|confirmed',
-            'password_confirmation' => 'required'
+            'password_confirmation' => 'required',
+            'g-recaptcha-response' => 'required|recaptcha'
         ]);
 
         $error_email = \Illuminate\Validation\ValidationException::withMessages([
@@ -44,7 +68,7 @@ class UsuarioController extends Controller
 
         $usuario->save();
 
-        return 'Usuario creado';
+        return redirect('/ingresar');
     }
 
     public function login(Request $request)
@@ -58,16 +82,22 @@ class UsuarioController extends Controller
             'email' => ['El email ingresado no se encuentra registrado']
         ]);
 
-        $encontro = Usuario::where('email', $request->email)->first();
+        $error_password = \Illuminate\Validation\ValidationException::withMessages([
+            'password' => ['La contraseña es incorrecta']
+        ]);
 
-        if(!$encontro)
+        $usuario = Usuario::where('email', $request->email)->first();
+
+        if(!$usuario)
             throw $error_email;
 
-        if(Hash::check($request->password, $encontro->pass)){
-            return "Pass coincide";
-        }
+        if(!Hash::check($request->password, $usuario->pass))
+            throw $error_password;
+        
 
-        return "Pass no coincide";
+        $request->session()->put('user_id', $usuario->id);
+        
+        return redirect('/');
     }
 
     public function show(Usuario $usuario)

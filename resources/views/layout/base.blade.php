@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Sistema de venta - @yield('titulo')</title>
+	<title>{{ $titulo_largo }} - @yield('titulo')</title>
 	<link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/all.css') }}">
@@ -11,7 +11,7 @@
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-negro">
-	    <a href="/" class="navbar-brand">SVP</a>
+	    <a href="/" class="navbar-brand">{{ $titulo_corto }}</a>
 	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar6">
 	        <span class="navbar-toggler-icon"></span>
 	    </button>
@@ -34,12 +34,8 @@
 	            </li>
 	        </ul>
 	        <ul class="navbar-nav ml-auto">
-	            <li class="nav-item">
-	                <a class="nav-link" href="ingresar">Ingresar</a>
-	            </li>
-	            <li class="nav-item">
-	                <a class="nav-link btn btn-success" href="registro">Registro</a>
-	            </li>
+	            @section('menu')
+				@show
 	        </ul>
 	    </div>
 	</nav>
@@ -60,4 +56,5 @@
 <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 </html>

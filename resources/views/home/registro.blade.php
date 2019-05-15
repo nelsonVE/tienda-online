@@ -42,6 +42,13 @@
 					  	<small class="form-text text-muted">Por favor repita la contraseña</small>
 					    <input name="password_confirmation" type="password" class="form-control" id="exampleInputPassword1" placeholder="Repita la contraseña" required>
 					  </div>
+						<div class="form-group">
+						@if(env('GOOGLE_RECAPTCHA_KEY'))
+							<div class="g-recaptcha"
+									data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+							</div>
+						@endif
+					  </div>
 					  <div class="form-group form-check">
 					    <input name="acepto" type="checkbox" class="form-check-input" id="exampleCheck1">
 					    <label class="form-check-label" for="exampleCheck1">Acepto los términos y condiciones</label>

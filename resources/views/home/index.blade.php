@@ -2,6 +2,31 @@
 
 @section('titulo', 'Inicio')
 
+@section('menu')
+
+@if($logged)
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Bienvenido, {{ $usuario->nombre }}
+		</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		<a class="dropdown-item" href="{{ url('/usuario/perfil') }}">Ver perfil</a>
+		<a class="dropdown-item" href="{{ url('/usuario/referidos') }}">Mis referidos</a>
+		<div class="dropdown-divider"></div>
+		<a class="dropdown-item" href="{{ url('/usuario/salir') }}">Salir</a>
+		</div>
+	</li>
+@else
+	<li class="nav-item">
+		<a class="nav-link" href="ingresar">Ingresar</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link btn btn-success" href="registro">Registro</a>
+	</li>
+@endif
+
+@endsection
+
 @section('contenido')
 <div class="container-fluid">
 		<div class="row">
