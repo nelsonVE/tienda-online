@@ -36,9 +36,16 @@ class UsuarioController extends Controller
         return redirect('/');
     }
 
-    public function create()
+    public function create($referencia = null)
     {
-        return view('home.registro');
+        $usuario = Usuario::where('codigo', $referencia)->first();
+
+        if(!$usuario)
+            $referencia = null;
+        
+        return view('home.registro',[
+            "referencia" => $usuario->id
+        ]);
     }
 
     public function store(Request $request)
@@ -49,7 +56,6 @@ class UsuarioController extends Controller
             'email' => 'required|string|max:128',
             'password' => 'required_with:password_confirmation|string|confirmed',
             'password_confirmation' => 'required',
-            'g-recaptcha-response' => 'required|recaptcha'
         ]);
 
         $error_email = \Illuminate\Validation\ValidationException::withMessages([
@@ -65,6 +71,10 @@ class UsuarioController extends Controller
         $usuario->apellido = $request->apellido;
         $usuario->email = $request->email;
         $usuario->pass = Hash::make($request->password);
+        $usuario->codigo = bin2hex(random_bytes(4));
+
+        if($request->referencia)
+            $usuario->referencia = $request->referencia;
 
         $usuario->save();
 
@@ -96,8 +106,18 @@ class UsuarioController extends Controller
         
 
         $request->session()->put('user_id', $usuario->id);
+        $request->session()->put('user_name', $usuario->nombre);
         
+        dd($usuario);
         return redirect('/');
+    }
+
+    public function perfil(Request $request)
+    {
+        $usuario = Usuario::find($request->session()->get('user_id'));
+        return view('perfil.index', [
+            "usuario" => $usuario
+        ]);
     }
 
     public function show(Usuario $usuario)

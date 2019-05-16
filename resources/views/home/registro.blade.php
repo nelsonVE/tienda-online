@@ -22,7 +22,11 @@
 					<hr>
 					<form  action="{{ url('/usuario') }}" method="post">
 					  @csrf
-					  <div class="form-group">
+						@if(isset($referencia))
+						Referido ID: {{ $referencia }}
+						<input name="referencia" type="hidden" value="{{ $referencia }}">
+						@endif
+						<div class="form-group">
 					  	<small class="form-text text-muted">Por favor ingresa tu nombre real</small>
 					    <input name="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" required>
 					  </div>
@@ -41,13 +45,6 @@
 					  <div class="form-group">
 					  	<small class="form-text text-muted">Por favor repita la contraseña</small>
 					    <input name="password_confirmation" type="password" class="form-control" id="exampleInputPassword1" placeholder="Repita la contraseña" required>
-					  </div>
-						<div class="form-group">
-						@if(env('GOOGLE_RECAPTCHA_KEY'))
-							<div class="g-recaptcha"
-									data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
-							</div>
-						@endif
 					  </div>
 					  <div class="form-group form-check">
 					    <input name="acepto" type="checkbox" class="form-check-input" id="exampleCheck1">
