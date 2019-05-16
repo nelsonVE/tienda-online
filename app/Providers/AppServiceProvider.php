@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         \View::share('titulo_largo', 'Sistema de venta de productos');
         \View::share('titulo_corto', 'SVP');
+        \View::share('url', 'http://localhost:8000/');
         Schema::defaultStringLength(191);
-        Validator::extend('recaptcha', 'App\\Validators\\ReCaptcha@validate');
     }
 }
