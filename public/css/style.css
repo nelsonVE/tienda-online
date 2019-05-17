@@ -30,3 +30,7 @@ body{
 .bg-whatsapp{
 	color: #009A00;
 }
+
+.radius{
+	border-radius: 5px;
+}
