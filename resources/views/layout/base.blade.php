@@ -18,19 +18,19 @@
 	    <div class="navbar-collapse collapse justify-content-stretch" id="navbar6">
 	        <ul class="navbar-nav">
 	            <li class="nav-item active">
-	                <a class="nav-link" href="index">Inicio</a>
+	                <a class="nav-link" href="{{ url('/') }}">Inicio</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link" href="productos">Productos</a>
+	                <a class="nav-link" href="{{ url('/productos') }}">Productos</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link" href="top">Top 100</a>
+	                <a class="nav-link" href="{{ url('/top') }}">Top 100</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link" href="acerca">Acerca de</a>
+	                <a class="nav-link" href="{{ url('/acerca') }}">Acerca de</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link" href="contacto">Contacto</a>
+	                <a class="nav-link" href="{{ url('/contactos') }}">Contacto</a>
 	            </li>
 	        </ul>
 	        <ul class="navbar-nav ml-auto">
@@ -42,6 +42,9 @@
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="{{ url('/usuario/perfil') }}">Ver perfil</a>
 					<a class="dropdown-item" href="{{ url('/usuario/referidos') }}">Mis referidos</a>
+					@if(session()->get('user_type') == 2)
+					<a class="dropdown-item" href="{{ url('/admin') }}">Panel administrativo</a>
+					@endif
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="{{ url('/usuario/salir') }}">Salir</a>
 					</div>
@@ -63,7 +66,7 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12 text-center pt-3 bg-negro">
+			<div class="col-md-12 text-center pt-3 fixed-bottom bg-negro">
 				<p class="text-white">Todos los derechos reservados&copy;</p>
 			</div>
 		</div>
@@ -73,6 +76,6 @@
 
 <script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 </html>

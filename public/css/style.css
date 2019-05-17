@@ -1,9 +1,14 @@
 body{
 	padding-top: 55px;
+	background-color: #DEE4E7;
 }
 
 .bg-gris{
 	background-color: #DEE4E7;
+}
+
+.bg-blanco{
+	background-color: #fff;
 }
 
 .bg-negro{
