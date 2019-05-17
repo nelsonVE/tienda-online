@@ -7,3 +7,7 @@ Route::get('/usuario/salir', 'UsuarioController@salir')->middleware('checklogin'
 Route::get('/usuario/perfil', 'UsuarioController@perfil')->middleware('checklogin');
 Route::post('/usuario', 'UsuarioController@store');
 Route::post('/usuario/login', 'UsuarioController@login');
+
+Route::get('/email-verification/{key}', 'VerificacionController@verificar');
+
+Route::get('/admin', 'AdminController@index')->middleware('checkadmin');
