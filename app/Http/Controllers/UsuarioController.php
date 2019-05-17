@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Usuario;
+use App\Verificacion;
+use App\RolUsuario;
+use App\Mail\VerificacionEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
@@ -42,9 +46,11 @@ class UsuarioController extends Controller
 
         if(!$usuario)
             $referencia = null;
+        else
+            $referencia = $usuario->id;
         
         return view('home.registro',[
-            "referencia" => $usuario->id
+            "referencia" => $referencia
         ]);
     }
 
@@ -66,17 +72,38 @@ class UsuarioController extends Controller
             throw $error_email;
 
         $usuario = new Usuario();
+        $verificacion = new Verificacion();
 
         $usuario->nombre = $request->nombre;
         $usuario->apellido = $request->apellido;
         $usuario->email = $request->email;
         $usuario->pass = Hash::make($request->password);
-        $usuario->codigo = bin2hex(random_bytes(4));
+        $usuario->rol = 1;
+        $repetido = null;
+
+        do{
+            $usuario->codigo = bin2hex(random_bytes(4));
+            $repetido = Usuario::where('codigo', $usuario->codigo)->first();
+        } while($repetido);
 
         if($request->referencia)
             $usuario->referencia = $request->referencia;
 
         $usuario->save();
+
+        $usuario = null;
+        $usuario = Usuario::where('email', $request->email)->first();
+
+        $verificacion->fk_usuario = $usuario->id;
+        $verificacion->key = bin2hex(random_bytes(10));
+        $verificacion->activo = true;
+
+        $verificacion->save();
+
+        $email = new \stdClass();
+        $email->key = $verificacion->key;
+        $email->username = $usuario->nombre;
+        Mail::to($usuario->email)->send(new VerificacionEmail($email));
 
         return redirect('/ingresar');
     }
@@ -92,6 +119,10 @@ class UsuarioController extends Controller
             'email' => ['El email ingresado no se encuentra registrado']
         ]);
 
+        $error_confirmacion = \Illuminate\Validation\ValidationException::withMessages([
+            'email' => ['Necesitas confirmar tu dirección de correo electrónico']
+        ]);
+
         $error_password = \Illuminate\Validation\ValidationException::withMessages([
             'password' => ['La contraseña es incorrecta']
         ]);
@@ -103,12 +134,15 @@ class UsuarioController extends Controller
 
         if(!Hash::check($request->password, $usuario->pass))
             throw $error_password;
+
+        if(!$usuario->email_verified_at)
+            throw $error_confirmacion;
         
 
         $request->session()->put('user_id', $usuario->id);
         $request->session()->put('user_name', $usuario->nombre);
-        
-        dd($usuario);
+        $request->session()->put('user_type', $usuario->rol);
+
         return redirect('/');
     }
 

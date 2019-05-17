@@ -4,13 +4,16 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model
+class Verificacion extends Model
 {
+    protected $table = 'verificacion';
+    
     protected $fillable = [
-    	'nombre', 'apellido', 'email', 'referencia', 'codigo', 'rol'
+        'fk_usuario', 'activo'
     ];
 
     protected $hidden = [
-    	'pass'
+        'key'
     ];
+
 }
