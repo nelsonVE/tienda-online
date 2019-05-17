@@ -25,8 +25,8 @@
 					Productos
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url('/') }}">Ver/editar productos</a>
-                    <a class="dropdown-item" href="{{ url('/') }}">Agregar producto</a>
+                    <a class="dropdown-item" href="{{ url('/admin/productos') }}">Ver/editar productos</a>
+                    <a class="dropdown-item" href="{{ url('/admin/producto/agregar') }}">Agregar producto</a>
 					</div>
 				</li>
 	            <li class="nav-item dropdown">
@@ -34,7 +34,7 @@
 					Usuarios
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url('/') }}">Ver/editar usuarios</a>
+                    <a class="dropdown-item" href="{{ url('/admin/usuarios') }}">Ver/editar usuarios</a>
 					</div>
 				</li>
 	            <li class="nav-item dropdown">

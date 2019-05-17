@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Usuario;
 use App\Verificacion;
-use App\RolUsuario;
+use App\Rol;
 use App\Mail\VerificacionEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -158,6 +158,17 @@ class UsuarioController extends Controller
     {
         echo 'Email: '.$usuario->email.' - .';
         return 'OK';
+    }
+
+    public function showall()
+    {
+        $usuarios = Usuario::all();
+        $roles = Rol::all();
+
+        return view('admin.usuario.ver', [
+            'usuarios' => $usuarios,
+            'roles' => $roles
+        ]);
     }
 
     public function edit(Usuario $usuario)

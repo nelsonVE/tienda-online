@@ -11,3 +11,7 @@ Route::post('/usuario/login', 'UsuarioController@login');
 Route::get('/email-verification/{key}', 'VerificacionController@verificar');
 
 Route::get('/admin', 'AdminController@index')->middleware('checkadmin');
+
+Route::get('/admin/productos', 'ProductoController@showall')->middleware('checkadmin');
+
+Route::get('/admin/usuarios', 'UsuarioController@showall')->middleware('checkadmin');
