@@ -160,25 +160,60 @@ class UsuarioController extends Controller
         return 'OK';
     }
 
-    public function showall()
+    public function showall($codigo = null)
     {
         $usuarios = Usuario::all();
         $roles = Rol::all();
 
         return view('admin.usuario.ver', [
             'usuarios' => $usuarios,
+            'roles' => $roles,
+            'codigo' => $codigo
+        ]);
+    }
+
+    public function edit($usuario)
+    {
+        $usuario_get = Usuario::find($usuario);
+
+        if(!$usuario_get)
+            return redirect('/admin/usuarios/404');
+
+        $roles = Rol::all();
+
+        return view('admin.usuario.editar', [
+            'usuario' => $usuario_get,
             'roles' => $roles
         ]);
     }
 
-    public function edit(Usuario $usuario)
+    public function update(Request $request)
     {
-        //
-    }
+        $validarDatos = $request->validate([
+            'nombre' => 'required|string|max:64',
+            'apellido' => 'required|string|max:64',
+            'rol' => 'required'
+        ]);
 
-    public function update(Request $request, Usuario $usuario)
-    {
-        //
+        $error_id = \Illuminate\Validation\ValidationException::withMessages([
+            'id' => ['Por motivos de seguridad no puedes editar tu propio usuario']
+        ]);
+
+        if($request->id == $request->session()->get('user_id'))
+            throw $error_id;
+
+        $usuario = Usuario::find($request->id);
+
+        if(!$usuario)
+            return redirect('/admin/usuarios/404');
+
+        $usuario->nombre = $request->nombre;
+        $usuario->apellido = $request->apellido;
+        $usuario->rol = $request->rol;
+
+        $usuario->save();
+        
+        return redirect('/admin/usuarios/202');
     }
 
     public function destroy(Usuario $usuario)
