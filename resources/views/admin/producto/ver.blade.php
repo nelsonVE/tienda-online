@@ -5,7 +5,17 @@
 @section('contenido')
 
 <div class="container bg-blanco p-3 pt-5 mt-5 radius" style="min-width: 411px;">
-    <h2 class="text-center">Productos</h2><br><br>
+    <h2 class="text-center">Productos</h2> <br>
+    @if($codigo == 202)
+    <div class="alert alert-success text-center">
+        <strong>Producto editado con éxito</strong>
+    </div><br><br>
+    @endif
+    @if($codigo == 203)
+    <div class="alert alert-success text-center">
+        <strong>Producto creado con éxito</strong>
+    </div><br><br>
+    @endif
     <table class="table table-hover">
     <thead>
         <tr>
@@ -23,7 +33,7 @@
         <td>{{ $producto->nombre }}</td>
         <td>{{ $producto->descripcion }}</td>
         <td>{{ $producto->precio }}</td>
-        <td><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></td>
+        <td><a class="nav-link btn btn-success" href="{{ url('/admin/producto/editar/'.$producto->id) }}"><i class="fas fa-edit"></i></a></td>
         </tr>
         @endforeach
     </tbody>

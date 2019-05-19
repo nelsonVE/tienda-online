@@ -51,10 +51,10 @@
 				</li>
 			@else
 				<li class="nav-item">
-					<a class="nav-link" href="ingresar">Ingresar</a>
+					<a class="nav-link" href="{{ url('/ingresar') }}">Ingresar</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link btn btn-success" href="registro">Registro</a>
+					<a class="nav-link btn btn-success" href="{{ url('/registro') }}">Registro</a>
 				</li>
 			@endif
 	        </ul>
