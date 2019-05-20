@@ -13,7 +13,7 @@
  - [x] ~~Creación de vistas administrativas~~
  - [x] ~~Creación, visualización y edición de productos vía administración~~
  - [x] ~~Edición y visualización de usuarios vía administración~~
- - [ ] Visualización y realización de compras vía panel administrativo
+ - [x] ~~Visualización y realización de compras vía panel administrativo~~
  - [ ] Registro de direcciones IP para evitar multicuentas
  - [ ] Visualización de top 100 de usuarios con más referidos activos
  - [ ] Mostrar referidos en perfil de usuario
