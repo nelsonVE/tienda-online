@@ -12,21 +12,9 @@ use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $usuario = Usuario::find($request->session()->get('user_id'));
-        
-        if(!$usuario)
-            return view('home.index', [
-                "logged" => false
-            ]);
-        
-        else
-            return view('home.index', [
-                "logged" => true,
-                "usuario" => $usuario
-            ]);
-        
+        return view('home.index');
     }
 
     public function ingresar()
@@ -144,14 +132,6 @@ class UsuarioController extends Controller
         $request->session()->put('user_type', $usuario->rol);
 
         return redirect('/');
-    }
-
-    public function perfil(Request $request)
-    {
-        $usuario = Usuario::find($request->session()->get('user_id'));
-        return view('perfil.index', [
-            "usuario" => $usuario
-        ]);
     }
 
     public function show(Usuario $usuario)
