@@ -30,3 +30,9 @@ Route::post('/admin/producto/agregar', 'ProductoController@store')->middleware('
 Route::get('/admin/usuarios/{codigo?}', 'UsuarioController@showall')->middleware('checkadmin');
 Route::get('/admin/usuario/editar/{id}', 'UsuarioController@edit')->middleware('checkadmin');
 Route::post('/admin/usuarios', 'UsuarioController@update')->middleware('checkadmin');
+
+// --> Administración: Compras
+Route::get('/admin/compras/{codigo?}', 'CompraController@index')->middleware('checkadmin');
+Route::get('/admin/compra/agregar', 'CompraController@create')->middleware('checkadmin');
+Route::post('/admin/compra/agregar', 'CompraController@store')->middleware('checkadmin');
+Route::post('/admin/compra/get_total', 'CompraController@getTotal')->middleware('checkadmin');
