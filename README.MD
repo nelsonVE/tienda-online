@@ -16,8 +16,8 @@
  - [x] ~~Visualización y realización de compras vía panel administrativo~~
  - [ ] Registro de direcciones IP para evitar multicuentas
  - [ ] Visualización de top 100 de usuarios con más referidos activos
- - [ ] Mostrar referidos en perfil de usuario
- - [ ] Mostrar total de compras de referidos en perfil de usuario
+ - [x] ~~Mostrar referidos en perfil de usuario~~
+ - [x] ~~Mostrar total de compras de referidos en perfil de usuario~~
  - [ ] Optimización de código
  - [ ] Adaptación de Laravel con Apache
 
