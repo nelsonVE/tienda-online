@@ -20,7 +20,7 @@
             @endif
             <hr>
             <h5 class="text-center">Por favor rellene los campos a continuación:</h5><br>
-            <form action="/admin/producto/agregar" method="post">
+            <form action="{{ url('/admin/producto/agregar') }}" method="post">
                 @csrf
                 <div class="form-group">
                 <input type="text" class="form-control" name="nombre" placeholder="Nombre del producto" required>

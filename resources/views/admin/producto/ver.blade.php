@@ -4,7 +4,7 @@
 
 @section('contenido')
 
-<div class="container bg-blanco p-3 pt-5 mt-5 radius" style="min-width: 411px;">
+<div class="container bg-blanco p-3 pt-5 my-5 radius" style="min-width: 411px;">
     <h2 class="text-center">Productos</h2> <br>
     @if($codigo == 202)
     <div class="alert alert-success text-center">

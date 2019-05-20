@@ -20,7 +20,7 @@
             @endif
             <hr>
             <h5 class="text-center">Por favor rellene los campos a continuación:</h5><br>
-            <form action="/admin/productos" method="post">
+            <form action="{{ url('/admin/productos') }}" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{ $producto->id }}">
                 <div class="form-group">
