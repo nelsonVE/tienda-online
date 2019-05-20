@@ -11,7 +11,8 @@ Route::post('/usuario', 'UsuarioController@store');
 Route::post('/usuario/login', 'UsuarioController@login');
 
 // --> Usuario: Perfil
-Route::get('/usuario/perfil', 'UsuarioController@perfil')->middleware('checklogin');
+Route::get('/usuario/perfil', 'PerfilController@index')->middleware('checklogin');
+Route::get('/usuario/referidos', 'ReferidoController@index')->middleware('checklogin');
 
 // --> Verificaciones de usuario
 Route::get('/email-verification/{key}', 'VerificacionController@verificar');

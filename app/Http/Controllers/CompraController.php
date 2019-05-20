@@ -53,10 +53,13 @@ class CompraController extends Controller
         ]);
 
         $producto = Producto::find($request->producto);
+        $usuario = Usuario::find($request->usuario);
+
+        if(!$usuario->activo)
+            $usuario->activo = true;
         
         $date = Carbon::now();
         
-        //dd($request->usuario);
         $compra = new Compra();
         $compra->fk_usuario = $request->usuario;
         $compra->fk_producto = $request->producto;
@@ -64,6 +67,7 @@ class CompraController extends Controller
         $compra->total = ($request->cantidad * $producto->precio);
         $compra->fecha_compra = $date->toDateString();
 
+        $usuario->save();
         $compra->save();
 
         return redirect('/admin/compras/202');
