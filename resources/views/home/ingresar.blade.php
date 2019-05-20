@@ -20,7 +20,7 @@
 				      </div><br />
 				    @endif
 					<hr> <br>
-					<form action="/usuario/login" method="post">
+					<form action="{{ url('/usuario/login') }}" method="post">
 					  @csrf
 					  <div class="form-group">
 					    <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Dirección de correo electrónico" required>

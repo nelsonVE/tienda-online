@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>{{ $titulo_largo }} - @yield('titulo')</title>
 	<link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
 
@@ -42,8 +43,8 @@
 					Compras
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url('/') }}">Ver compras realizadas</a>
-                    <a class="dropdown-item" href="{{ url('/') }}">Realizar compra</a>
+                    <a class="dropdown-item" href="{{ url('/admin/compras') }}">Ver compras realizadas</a>
+                    <a class="dropdown-item" href="{{ url('/admin/compra/agregar') }}">Realizar compra</a>
 					</div>
 				</li>
 	        </ul>
@@ -74,7 +75,7 @@
 
 </body>
 
-<script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"></script>
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>

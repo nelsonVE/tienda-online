@@ -24,7 +24,7 @@
             <small class="form-text text-muted text-center alert-danger p-1">¡Este usuario aún no ha verificado su email!</small>
             @endif
             <br>
-            <form action="/admin/usuarios" method="post">
+            <form action="{{ url('/admin/usuarios') }}" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{ $usuario->id }}">
                 <div class="form-group">
